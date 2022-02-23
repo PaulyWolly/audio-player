@@ -1,5 +1,4 @@
 .audioPlayer {
-
   /* variables */
   --primary: blue;
   --secondary: purple;
@@ -8,6 +7,7 @@
   --SteelBlue: rgb(86, 117, 202);
   --Yellow: rgb(243, 240, 44);
   --White: #fff;
+  --roundedCorner: 10px;
 
   align-items: center;
   display: flex;
@@ -37,12 +37,85 @@
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  font-size: 20px;
+  font-size: 20px; /* icon size within the play button */
   color: var(--White);
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; /* center horizontally */
+  align-items: center; /* center vertically */
   cursor: pointer;
+}
+
+.play {
+  position: relative;
+  left: 2px;
+}
+
+.currentTime, .duration {
+  font-family: monospace;
+  font-size: 16px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.progressBar {
+  /* variables */
+  --bar-bg: #f1dbb2;
+  --seek-before-width: 0;
+  --seek-before-color: #f1ad88;
+  --knobby: rgb(36, 45, 97);
+  --selectedKnobby: #25c9c3;
+
+  appearance: none;
+  background: var(--bar-bg);
+  border-radius: 10px;
+  position: relative;
+  width: 280px;
+  height: 9px;
+  outline: none;
+
+  bottom: 1px;
+  cursor: pointer;
+}
+
+.progressBar::before {
+  content: '';
+  height: 9px;
+  width: var(--seek-before-width);
+  background-color: var(--seek-before-color);
+  border-top-left-radius: 9px;
+  border-bottom-left-radius: 9px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  cursor: pointer;
+
+}
+
+.progressBar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--knobby);
+  cursor: pointer;
+  position: relative;
+  top: 1px;
+  margin: -2px 0 0 0;
+  z-index: 5;
+  box-sizing: border-box;
+}
+
+/* knobby while dragging for chrom and safari */
+.progressBar:active::-webkit-slider-thumb {
+  /* transform: scale(1,2); */
+  background: var(--selectedKnobby);
+
+}
+
+.progressBarWrapper {
+  position: relative;
 }
 
 .muteVolume, .vol {
@@ -59,19 +132,6 @@
   cursor: pointer;
 }
 
-.play {
-  position: relative;
-  left: 3px;
-
-}
-
-.currentTime, .duration {
-  font-family: monospace;
-  font-size: 18px;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
 .volume {
   font-family: monospace;
   font-size: 20px;
@@ -80,11 +140,10 @@
   align-items: center;
 }
 
-
 .volumeBar {
   /* variables */
   --bar-bg: #f1dbb2;
-  --seek-before-width: 100%;
+  --seek-before-width: 100px;
   --seek-before-color: #ffc2a1;
   --knobby: rgb(36, 45, 97);
   --selectedKnobby: #25c9c3;
@@ -103,22 +162,25 @@
   cursor: pointer;
 }
 
-.progressBar {
-
-  /* variables */
-  --bar-bg: #f1dbb2;
-  --seek-before-width: 0;
-  --seek-before-color: #ffc2a1;
-  --knobby: rgb(36, 45, 97);
-  --selectedKnobby: #25c9c3;
-
-  appearance: none;
-  background: var(--bar-bg);
-  border-radius: 10px;
-  width: 280px;
-  height: 9px;
-  outline: none;
-  position: relative;
-  bottom: 1px;
+.chapter {
+  display: block;
+  height: 8.5px;
+  background-color: var(--tertiary);
+  position: absolute;
+  top: 7.5px;
+  left: var(--left);
+  width: var(--width);
   cursor: pointer;
+  pointer-events: none;
+  z-index:3;
+}
+
+.chapter.start {
+  border-top-left-radius: var(--roundedCorner);
+  border-bottom-left-radius: var(--roundedCorner);
+}
+
+.chapter.end {
+  border-top-right-radius: var(--roundedCorner);
+  border-bottom-right-radius: var(--roundedCorner);
 }

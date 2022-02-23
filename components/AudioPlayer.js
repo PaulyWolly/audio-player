@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useRef, useState, useEffect } from 'react'
 import styles from '../styles/AudioPlayer.module.css';
 
@@ -8,7 +9,7 @@ import {MdReplay30} from 'react-icons/md'
 import {IoVolumeHigh} from 'react-icons/io5'
 import {IoVolumeMute} from 'react-icons/io5'
 
-const AudioPlayer = () => {
+const AudioPlayer = ({ timeJump }) => {
 
   const [isPlaying, setIsPlaying] = useState(false)
   const [duration, setDuration] = useState(0)
@@ -23,6 +24,32 @@ const AudioPlayer = () => {
   const progressBar = useRef();   // reference to our progress bar
   const animationRef = useRef();   // reference animation we are working with
   const volumeBar = useRef();     // reference for our volume bar
+
+  const chapters = [
+    {
+      start: 0,
+      end: 15
+    },
+    {
+      start: 50,
+      end: 70
+    }
+  ]
+
+  useEffect(() => {
+    if (timeJump) {
+      timeTravel(timeJump);
+      setIsPlaying(true);
+      // play();
+    } else {
+      timeTravel(0);
+    }
+  }, [timeJump])
+
+  const play = () => {
+    audioPlayer.current.play();
+    animationRef.current = requestAnimationFrame(whilePlaying)
+  }
 
   useEffect(() => {
     const seconds = Math.floor(audioPlayer.current.duration)
@@ -74,12 +101,17 @@ const AudioPlayer = () => {
   }
 
   const backThirty = () => {
-    progressBar.current.value = Number(progressBar.current.value - 30);
+    progressBar.current.value = Number(progressBar.current.value) - 30;
     changeRange();
   }
 
   const aheadThirty = () => {
-    progressBar.current.value = Number(progressBar.current.value + 30);
+    progressBar.current.value = Number(progressBar.current.value) + 30;
+    changeRange();
+  }
+
+  const timeTravel = (newTime) => {
+    progressBar.current.value = newTime;
     changeRange();
   }
 
@@ -162,7 +194,7 @@ const AudioPlayer = () => {
       <div className={styles.currentTime}>{calculateTime(currentTime)}</div>
 
       {/* Progress bar */}
-      <div >
+      <div className={styles.progressBarWrapper}>
         <input
           className={styles.progressBar}
           defaultValue="0"
@@ -170,6 +202,23 @@ const AudioPlayer = () => {
           type="range"
           onChange={changeRange}
         />
+        {/* {chapters.map((chapter, i) => {
+          const leftStyle = chapter.start / duration * 100;
+          const widthStyle = (chapter.end - chapter.start) / duration * 100;
+          //console.table({i, leftStyle, widthStyle})
+
+          return (
+            <div
+              key={i}
+              className={`${styles.chapter} ${chapter.start == 0 && styles.start} ${chapter.end == duration && styles.end}`}
+              style={{
+                '--left': `${leftStyle}%`,
+                '--width': `${widthStyle}%`
+              }}
+            ></div>
+          )
+        })} */}
+
       </div>
 
       {/* Duration */}
@@ -191,7 +240,8 @@ const AudioPlayer = () => {
           max="1"
           step="0.1"
           onChange={changeVolume}
-        />{!mute && volume * 100 + `%`}
+        />
+        {/* {!mute && volume * 100 + `%`} */}
 
       <p>&nbsp;</p>
       {/* <div>

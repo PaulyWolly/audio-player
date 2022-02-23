@@ -2,8 +2,14 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { AudioPlayer } from '../components/AudioPlayer'
+import {useRouter} from 'next/router'
 
 export default function Home() {
+
+  const router = useRouter();
+  console.log(router.query)
+  const {t} = router.query;
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,7 +19,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <AudioPlayer />
+        <AudioPlayer timeJump={t} />
       </main>
 
     </div>
