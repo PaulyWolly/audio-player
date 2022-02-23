@@ -15,6 +15,7 @@ const AudioPlayer = () => {
   const [currentTime, setCurrentTime] = useState(0)
   const [volume, setVolume] = useState(0.5)
   const [mute, setMute] = useState(false)
+  const [volumePercent, setVolumePercent] = useState(50)
 
 
   // references
@@ -120,6 +121,7 @@ const AudioPlayer = () => {
     const prevValue = mute;
     const currentVolumeBeforeMute = volumeBar.current.value;
     setMute(!prevValue);
+    setVolumePercent(volumeBar.current.value)
 
     if (!prevValue) {
       const x = document.getElementById("audioPlayer");
@@ -129,6 +131,7 @@ const AudioPlayer = () => {
       const x = document.getElementById("audioPlayer");
       x.volume = 0.5;
       volumeBar.current.value = x.volume;
+      setVolumePercent(prevValue)
     }
   }
 
@@ -188,7 +191,7 @@ const AudioPlayer = () => {
           max="1"
           step="0.1"
           onChange={changeVolume}
-        />{volume * 100 + `%`}
+        />{!mute && volume * 100 + `%`}
 
       <p>&nbsp;</p>
       {/* <div>
