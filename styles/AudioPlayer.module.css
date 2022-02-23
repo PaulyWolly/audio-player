@@ -1,0 +1,124 @@
+.audioPlayer {
+
+  /* variables */
+  --primary: blue;
+  --secondary: purple;
+  --tertiary: red;
+  --green: rgb(19, 179, 41);
+  --SteelBlue: rgb(86, 117, 202);
+  --Yellow: rgb(243, 240, 44);
+  --White: #fff;
+
+  align-items: center;
+  display: flex;
+  width: 600px;
+  padding: 3px;
+  /* border: 1px solid grey; */
+  /* background-color: rgb(241, 236, 236); */
+}
+
+.forwardBackward {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  font-family: monospace;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.forwardBackward:hover {
+  color: var(--green);
+}
+
+.playPause {
+  background: var(--SteelBlue);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  color: var(--White);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.muteVolume, .vol {
+  background:transparent;
+  border: none;
+  /* border-radius: 50%; */
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.play {
+  position: relative;
+  left: 3px;
+
+}
+
+.currentTime, .duration {
+  font-family: monospace;
+  font-size: 18px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.volume {
+  font-family: monospace;
+  font-size: 20px;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+
+.volumeBar {
+  /* variables */
+  --bar-bg: #f1dbb2;
+  --seek-before-width: 100%;
+  --seek-before-color: #ffc2a1;
+  --knobby: rgb(36, 45, 97);
+  --selectedKnobby: #25c9c3;
+
+  appearance: none;
+  background: var(--bar-bg);
+  border-radius: 10px;
+  width: 60px;
+  height: 3px;
+  outline: none;
+  position: relative;
+  bottom: 1px;
+  margin-left: 0px;
+  margin-right: 20px;;
+  margin-top: 6px;
+  cursor: pointer;
+}
+
+.progressBar {
+
+  /* variables */
+  --bar-bg: #f1dbb2;
+  --seek-before-width: 0;
+  --seek-before-color: #ffc2a1;
+  --knobby: rgb(36, 45, 97);
+  --selectedKnobby: #25c9c3;
+
+  appearance: none;
+  background: var(--bar-bg);
+  border-radius: 10px;
+  width: 280px;
+  height: 9px;
+  outline: none;
+  position: relative;
+  bottom: 1px;
+  cursor: pointer;
+}
