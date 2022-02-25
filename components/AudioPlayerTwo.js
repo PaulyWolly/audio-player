@@ -10,9 +10,9 @@ import {MdReplay30} from 'react-icons/md'
 import {IoVolumeHigh} from 'react-icons/io5'
 import {IoVolumeMute} from 'react-icons/io5'
 
-import { useAudio } from '../hooks/AudioHook';
+import { useAudioTwo } from '../hooks/AudioHookTwo';
 
-const AudioPlayer = ({ timeJump, track }) => {
+const AudioPlayerTwo = ({ timeJump, track }) => {
 
 
 
@@ -23,7 +23,7 @@ const AudioPlayer = ({ timeJump, track }) => {
     play,
     mute,
     currentTime,
-    audioPlayer,
+    audioPlayerTwo,
     volumeBar,
     progressBar,
     calculateTime,
@@ -37,7 +37,7 @@ const AudioPlayer = ({ timeJump, track }) => {
     setIsPlaying,
     setDuration,
     setTimeJump
-  } = useAudio();
+  } = useAudioTwo();
 
   const chapters = [
     {
@@ -59,7 +59,7 @@ const AudioPlayer = ({ timeJump, track }) => {
       {/* Ode to Herb Alpert */}
       <audio
         id="audioPlayer"
-        ref={audioPlayer}
+        ref={audioPlayerTwo}
         src="https://cdn.simplecast.com/audio/cae8b0eb-d9a9-480d-a652-0defcbe047f4/episodes/af52a99b-88c0-4638-b120-d46e142d06d3/audio/500344fb-2e2b-48af-be86-af6ac341a6da/default_tc.mp3"
         //src="https://drive.google.com/file/d/0B7LtJfBiNp52ZjBjeGFWa3pHTXc/view?usp=sharing&amp;resourcekey=0-qXL8UkZInJp4yR10fFjvpA.mp3"
         preload="metadata"
@@ -145,7 +145,7 @@ const AudioPlayer = ({ timeJump, track }) => {
   )
 }
 
-AudioPlayer.propTypes = {
+AudioPlayerTwo.propTypes = {
   chapters: PropTypes.arrayOf(PropTypes.shape({
     start: PropTypes.number,
     end: PropTypes.number
@@ -154,9 +154,9 @@ AudioPlayer.propTypes = {
   track: PropTypes.string.isRequired
 };
 
-AudioPlayer.defaultProps = {
+AudioPlayerTwo.defaultProps = {
   chapters: [],
   timeJump: 0,
 };
 
-export { AudioPlayer }
+export { AudioPlayerTwo }
